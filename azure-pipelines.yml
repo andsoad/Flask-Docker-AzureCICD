@@ -38,7 +38,15 @@ stages:
         tags: |
           $(tag)
 
-- task: Docker@2
-  inputs:
-    containerRegistry: 'dockerflask'
-    command: 'start'
+- stage: Start
+  displayName: Start
+  jobs:
+  - job: Start
+    displayName: Start
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'dockerflask'
+        command: 'start'
