@@ -47,9 +47,13 @@ stages:
     displayName: Deploy
     steps:
     - task: AzureRmWebAppDeployment@4
-      displayName: 'Azure Web App on Container Deploy'
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'andsoad(141e191f-d316-4470-96e1-759e037fec91)'
-        WebappName: $(appName)
-        containers: $(containerRegistry)/$(imageRepository):$(tag)
+        appType: 'webAppContainer'
+        WebAppName: 'docker-flask'
+        deployToSlotOrASE: true
+        ResourceGroupName: 'web-app'
+        SlotName: 'production'
+        DockerNamespace: 'dockerflask.azurecr.io'
+        DockerRepository: 'dockercicd'
