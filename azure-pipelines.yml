@@ -46,9 +46,10 @@ stages:
   - job: Deploy
     displayName: Deploy
     steps:
-    - task: AzureWebAppContainer@1
+    - task: AzureRmWebAppDeployment@4
       displayName: 'Azure Web App on Container Deploy'
       inputs:
-        azureSubscription: $(azureSubscription)
-        appName: $(appName)
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'andsoad(141e191f-d316-4470-96e1-759e037fec91)'
+        WebappName: $(appName)
         containers: $(containerRegistry)/$(imageRepository):$(tag)
