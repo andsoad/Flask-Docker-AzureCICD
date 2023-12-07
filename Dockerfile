@@ -11,10 +11,10 @@ COPY . /app
 COPY sshd_config /etc/ssh/
 
 # Install needed packages for SSH
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends dialog
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends openssh-server
+RUN apk update
+RUN apk install dialog
+RUN apk update
+RUN apk add openssh-server
 RUN echo "$SSH_PASSWD" | chpasswd
 RUN chmod +x /app/init_container.sh
 
