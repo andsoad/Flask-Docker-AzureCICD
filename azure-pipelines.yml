@@ -38,15 +38,18 @@ stages:
         tags: |
           $(tag)
 
-- stage: Start
-  displayName: Start
-  jobs:
-  - job: Start
-    displayName: Start
-    pool:
-      vmImage: $(vmImageName)
+- stage: Deploy
+  displayName: Azure App Service Deploy
+  jobs: 
+  - job: Deploy
+    displayName: Deploy
     steps:
-    - task: Docker@2
+    - task: AzureRmWebAppDeployment@4
       inputs:
-        containerRegistry: 'dockerflask'
-        command: 'start'
+        ConnectionType: 'AzureRM'
+        appType: 'webAppContainer'
+        AppSettings: '-WEBSITES_PORT 8000'
+        WebAppName: $(webApp)
+        DockerNamespace: $(containerRegistry) 
+        DockerRepository: $(imageRepository) 
+        DockerImageTag: $(tag)
