@@ -18,6 +18,7 @@ RUN apk add openssh-server
 RUN echo "$SSH_PASSWD" | chpasswd
 # RUN chmod +x /app/init_container.sh
 
+#Expose Port
 EXPOSE 8000 2222
 
 # Run the bash script to start Flask
