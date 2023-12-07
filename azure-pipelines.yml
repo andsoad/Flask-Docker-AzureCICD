@@ -47,6 +47,7 @@ stages:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
+        azureSubscription: 'andsoad(141e191f-d316-4470-96e1-759e037fec91)'
         appType: 'webAppContainer'
         AppSettings: '-WEBSITES_PORT 8000'
         WebAppName: 'DockerFlask'
