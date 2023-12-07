@@ -49,7 +49,7 @@ stages:
         ConnectionType: 'AzureRM'
         appType: 'webAppContainer'
         AppSettings: '-WEBSITES_PORT 8000'
-        WebAppName: $(webApp)
+        WebAppName: 'DockerFlask'
         DockerNamespace: $(containerRegistry) 
         DockerRepository: $(imageRepository) 
         DockerImageTag: $(tag)
