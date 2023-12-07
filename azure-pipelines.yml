@@ -10,6 +10,8 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
+  azureSubscription: 'andsoad'
+  appName: 'docker-flask'
   dockerRegistryServiceConnection: '84e377d1-a6ba-431f-a979-b0668394b937'
   imageRepository: 'dockercicd'
   containerRegistry: 'dockerflask.azurecr.io'
@@ -44,13 +46,9 @@ stages:
   - job: Deploy
     displayName: Deploy
     steps:
-    - task: AzureRmWebAppDeployment@4
+    - task: AzureWebAppContainer@1
+      displayName: 'Azure Web App on Container Deploy'
       inputs:
-        ConnectionType: 'AzureRM'
-        azureSubscription: '141e191f-d316-4470-96e1-759e037fec91'
-        appType: 'webAppContainer'
-        AppSettings: '-WEBSITES_PORT 8000'
-        WebAppName: 'DockerFlask'
-        DockerNamespace: $(containerRegistry) 
-        DockerRepository: $(imageRepository) 
-        DockerImageTag: $(tag)
+        azureSubscription: $(azureSubscription)
+        appName: $(appName)
+        containers: $(containerRegistry)/$(imageRepository):$(tag)
