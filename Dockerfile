@@ -12,7 +12,7 @@ COPY sshd_config /etc/ssh/
 
 # Install needed packages for SSH
 RUN apk update
-RUN apk install dialog
+RUN apk add dialog
 RUN apk update
 RUN apk add openssh-server
 RUN echo "$SSH_PASSWD" | chpasswd
