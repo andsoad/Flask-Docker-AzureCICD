@@ -35,8 +35,7 @@ stages:
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+        tags: $(tag)
 
 - stage: Deploy
   displayName: Azure App Service Deploy
@@ -46,6 +45,7 @@ stages:
     steps:
     - task: AzureRmWebAppDeployment@4
       inputs:
+        ConnectedServiceName: 'Azure'
         AppSettings: '-WEBSITES_PORT 8000'
         WebAppName: 'DockerFlask'
         DockerNamespace: $(containerRegistry) 
